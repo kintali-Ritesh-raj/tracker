@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waypoint — project tracking for small dev teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ecebe7;
+    --surface: #e1dfd9;
+    --ink: #38450f;
+    --muted: #5d683a;
+    --accent: #38450f;
+    --accent-ink: #ecebe7;
+    --field-1: #38450f;
+    --field-1-ink: #ecebe7;
+
+    --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+    --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+    --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+
+    --margin: clamp(16px, 3vw, 32px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-size: var(--step-body);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+  h1, h2, h3 {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin: 0;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    min-height: 44px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: var(--step-body);
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--muted); }
+  .btn--inverted { background: var(--accent-ink); color: var(--field-1); }
+  .btn--inverted:hover { background: #d8d6cf; }
+
+  header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px var(--margin) 0;
+    font-size: var(--step-small);
+  }
+
+  .hero {
+    min-height: 90vh;
+    padding: 0 var(--margin) 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero__statement {
+    margin-top: 15vh;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    letter-spacing: -0.03em;
+  }
+  .hero__statement span { display: block; }
+  .hero__statement .line1 { color: var(--muted); }
+  .hero__statement .line2 { color: var(--ink); }
+  .hero__foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero__sub { max-width: 28ch; font-size: var(--step-lead); color: var(--muted); }
+
+  section { padding: 0; }
+  .section-heading { font-size: clamp(2rem, 3.5vw, 3.5rem); margin-bottom: 24px; }
+
+  .features { display: flex; flex-wrap: wrap; min-height: 90vh; }
+  .features__intro {
+    flex: 1 1 50%;
+    background: var(--bg);
+    padding: 64px var(--margin);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+  }
+  .features__rows {
+    flex: 1 1 50%;
+    background: #232a09;
+    color: var(--field-1-ink);
+    display: flex;
+    flex-direction: column;
+  }
+  .features__row {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 5fr 4fr 3fr;
+    gap: 16px;
+    padding: 28px;
+    border-top: none;
+  }
+  .features__row:nth-child(odd) { background: #2b3310; }
+  .features__row h3 { font-size: 1.75rem; }
+  .features__row p { margin: 8px 0 0; font-size: var(--step-small); color: #c7cdb0; }
+  .features__row ul { margin: 8px 0 0; padding: 0; list-style: none; font-size: var(--step-small); color: #c7cdb0; }
+
+  .pricing { padding: 120px var(--margin); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 20px; font-size: var(--step-body); }
+  thead th { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; font-family: 'Bodoni Moda', serif; }
+  thead .price { display: block; font-size: 1.25rem; font-weight: 400; margin-top: 8px; }
+  thead .period { font-size: var(--step-small); color: var(--muted); }
+  tbody tr:nth-child(even) td { background: var(--surface); }
+  tbody tr td.plan-recommended,
+  thead tr th.plan-recommended { background: var(--accent); color: var(--accent-ink); }
+
+  .cta {
+    background: var(--field-1);
+    color: var(--field-1-ink);
+    min-height: 90vh;
+    padding: 0 var(--margin);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 2px solid var(--field-1);
+  }
+  .cta__head { margin-top: 15vh; font-size: clamp(2.5rem, 10vw, 7rem); }
+  .cta__foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+
+  footer {
+    background: var(--field-1);
+    color: var(--field-1-ink);
+    padding: 160px var(--margin) 48px;
+    text-align: center;
+  }
+  footer h2 { font-size: clamp(3rem, 12vw, 10rem); }
+
+  @media (max-width: 760px) {
+    .features { flex-direction: column; }
+    .features__row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span>Waypoint</span>
+  <a href="#pricing">See pricing</a>
+</header>
+
+<section class="hero">
+  <h1 class="hero__statement">
+    <span class="line1">Ship the plan,</span>
+    <span class="line2">not the standup.</span>
+  </h1>
+  <div class="hero__foot">
+    <p class="hero__sub">Waypoint turns a messy backlog into one shared view your team actually opens — three screens, no setup call.</p>
+    <a class="btn" href="#pricing">Start free</a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features__intro">
+    <h2 class="section-heading">
+      <span style="display:block; text-align:left;">What a team</span>
+      <span style="display:block; text-align:right;">of six actually</span>
+      <span style="display:block; text-align:left;">needs from this.</span>
+    </h2>
+    <div class="hero__foot">
+      <p class="hero__sub">No admin console to configure first. Four screens cover planning, review and release.</p>
+      <a class="btn" href="#pricing">See a live board</a>
+    </div>
+  </div>
+  <div class="features__rows">
+    <div class="features__row">
+      <h3>Boards that read</h3>
+      <p>One column per stage, sized by what's actually in it, not a fixed grid of cards.</p>
+      <ul><li>Drag or keyboard</li><li>Saved filters</li><li>Per-project swimlanes</li></ul>
+    </div>
+    <div class="features__row">
+      <h3>Releases, named</h3>
+      <p>Group finished work into a release note before you ship it, not after.</p>
+      <ul><li>Auto-changelog</li><li>Version tags</li><li>One-click rollback note</li></ul>
+    </div>
+    <div class="features__row">
+      <h3>Status, asked once</h3>
+      <p>A daily digest answers "what shipped" so nobody has to ask in standup.</p>
+      <ul><li>Slack digest</li><li>Email digest</li><li>No bot DMs</li></ul>
+    </div>
+    <div class="features__row">
+      <h3>History that holds up</h3>
+      <p>Every move is logged against the person and the reason, searchable later.</p>
+      <ul><li>Full audit log</li><li>CSV export</li><li>No log purge fee</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <h2 class="section-heading">Plans</h2>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Compare</th>
+        <th scope="col">Solo<span class="price">$0<span class="period">/mo</span></span></th>
+        <th scope="col">Team<span class="price">$12<span class="period">/seat/mo</span></span></th>
+        <th scope="col" class="plan-recommended">Studio<span class="price">$24<span class="period">/seat/mo</span></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Seats</td><td>1</td><td>Up to 10</td><td class="plan-recommended">Unlimited</td>
+      </tr>
+      <tr>
+        <td>Boards</td><td>3</td><td>Unlimited</td><td class="plan-recommended">Unlimited</td>
+      </tr>
+      <tr>
+        <td>Release notes</td><td>Not included</td><td>Included</td><td class="plan-recommended">Included</td>
+      </tr>
+      <tr>
+        <td>Audit log</td><td>Not included</td><td>30 days</td><td class="plan-recommended">Unlimited</td>
+      </tr>
+      <tr>
+        <td>Support</td><td>Community</td><td>Email, 1 business day</td><td class="plan-recommended">Email, same day</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a class="btn" href="#" style="background:var(--muted)">Start free</a></td>
+        <td><a class="btn" href="#">Start Team</a></td>
+        <td class="plan-recommended"><a class="btn btn--inverted" href="#">Start Studio</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="cta">
+  <h2 class="cta__head">
+    <span style="display:block;">Ship the plan,</span>
+    <span style="display:block;">not the standup.</span>
+  </h2>
+  <div class="cta__foot">
+    <p class="hero__sub" style="color:#c7cdb0;">Free for one project, no card required.</p>
+    <a class="btn btn--inverted" href="#pricing">Start free</a>
+  </div>
+</section>
+
+<footer>
+  <h2>Waypoint</h2>
+</footer>
+
+</body>
+</html>
