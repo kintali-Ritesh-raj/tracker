@@ -10,6 +10,9 @@ backend/firebase-service-account*.json
 # Flutter
 app/.dart_tool/
 app/build/
+app/android/build/
+app/android/.gradle/
+app/android/.kotlin/
 app/.flutter-plugins
 app/.flutter-plugins-dependencies
 app/android/app/google-services.json

@@ -34,6 +34,8 @@ class Connection:
 class Hub:
     def __init__(self) -> None:
         self._connections: set[Connection] = set()
+        # Strong references so fire-and-forget tasks are not garbage collected.
+        self._tasks: set[asyncio.Task] = set()
 
     async def register(self, websocket: WebSocket, device_id: int, audience: str) -> Connection:
         conn = Connection(websocket, device_id, audience)
