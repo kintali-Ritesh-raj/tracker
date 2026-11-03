@@ -79,7 +79,7 @@ cd app
 flutter pub get
 ```
 
-1. **Google Maps key.** Add it to `app/android/local.properties` (not committed):
+1. **Google Maps key.** Add it to `app/android/secrets.properties` (git-ignored; Flutter rewrites `local.properties` on each build):
    ```
    MAPS_API_KEY=AIza...your Android-restricted Maps SDK key
    ```

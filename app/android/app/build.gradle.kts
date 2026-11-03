@@ -12,9 +12,13 @@ if (file("google-services.json").exists()) {
     apply(plugin = "com.google.gms.google-services")
 }
 
+// API keys live in android/secrets.properties (git-ignored). Flutter rewrites
+// local.properties on every build, so keys kept there can be lost.
 val localProps = Properties().apply {
-    val f = rootProject.file("local.properties")
-    if (f.exists()) f.inputStream().use { load(it) }
+    for (name in listOf("local.properties", "secrets.properties")) {
+        val f = rootProject.file(name)
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
 }
 
 android {

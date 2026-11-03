@@ -17,6 +17,7 @@ app/.flutter-plugins
 app/.flutter-plugins-dependencies
 app/android/app/google-services.json
 app/android/local.properties
+app/android/secrets.properties
 app/android/key.properties
 *.jks
 *.keystore

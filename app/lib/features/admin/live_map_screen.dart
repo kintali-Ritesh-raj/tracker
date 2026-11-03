@@ -284,9 +284,9 @@ class LiveMapScreenState extends State<LiveMapScreen> {
                       ),
                       if (!store.loading && _markerSet.isEmpty)
                         Positioned(
-                          left: 24,
-                          right: 24,
-                          top: 80,
+                          left: 16,
+                          right: 80, // clear of the map buttons on the right
+                          top: 64,
                           child: GlassCard(
                             blur: true,
                             child: Text(

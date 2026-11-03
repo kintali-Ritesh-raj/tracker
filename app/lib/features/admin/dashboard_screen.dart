@@ -42,10 +42,15 @@ class DashboardScreen extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(child: Text(greeting(now), style: t.headlineMedium?.copyWith(fontSize: 24))),
-                  const SizedBox(width: 6),
-                  const Text('👋', style: TextStyle(fontSize: 22)),
-                  const Spacer(),
+                  Expanded(
+                    child: Text(
+                      '${greeting(now)} 👋',
+                      style: t.headlineMedium?.copyWith(fontSize: 24),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(color: AppColors.orangeTint, borderRadius: BorderRadius.circular(10)),
