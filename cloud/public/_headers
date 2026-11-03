@@ -1,0 +1,10 @@
+/download/*
+  Content-Type: application/vnd.android.package-archive
+  Content-Disposition: attachment
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+/*
+  X-Frame-Options: DENY
+  Referrer-Policy: same-origin
+  X-Content-Type-Options: nosniff

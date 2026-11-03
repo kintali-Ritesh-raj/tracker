@@ -46,14 +46,30 @@ android {
         manifestPlaceholders["usesCleartextTraffic"] = "false"
     }
 
+    // Release signing from android/key.properties + upload-keystore.jks (both
+    // git-ignored). Keep a backup: updates must be signed with the same key.
+    val keyProps = Properties().apply {
+        val f = rootProject.file("key.properties")
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
+    signingConfigs {
+        if (keyProps.containsKey("storeFile")) {
+            create("release") {
+                storeFile = file(keyProps.getProperty("storeFile"))
+                storePassword = keyProps.getProperty("storePassword")
+                keyAlias = keyProps.getProperty("keyAlias")
+                keyPassword = keyProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         debug {
             // Allows http:// to a LAN dev server; release builds require HTTPS.
             manifestPlaceholders["usesCleartextTraffic"] = "true"
         }
         release {
-            // Replace with a real signing config (android/key.properties) before publishing.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
 }

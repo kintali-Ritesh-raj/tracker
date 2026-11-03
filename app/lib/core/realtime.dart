@@ -84,6 +84,12 @@ class RealtimeConnection {
         _channel?.sink.add(jsonEncode({'type': 'pong'}));
         return;
       }
+      if (type == 'device.revoked') {
+        // Same meaning as close code 4401: stop retrying and unpair.
+        _closed = true;
+        _events.add(RealtimeEvent('unauthorized', const {}));
+        return;
+      }
       _events.add(RealtimeEvent(type, (msg['data'] as Map?)?.cast<String, dynamic>() ?? {}));
     } catch (_) {
       // Ignore malformed frames.

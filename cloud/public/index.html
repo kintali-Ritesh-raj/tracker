@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFF9F4">
+  <title>SLG FieldTrack</title>
+  <meta name="description" content="Download the SLG FieldTrack Android app for SLG Housekeeping &amp; Facility Services staff.">
+  <style>
+    :root {
+      --orange: #F97316;
+      --orange-deep: #EA580C;
+      --orange-soft: #FFEDD5;
+      --orange-tint: #FFF4EA;
+      --cream: #FFF9F4;
+      --ink: #1C1917;
+      --ink-soft: #44403C;
+      --muted: #78716C;
+      --hairline: #F1E7DD;
+      --green: #16A34A;
+      --card: rgba(255, 255, 255, 0.86);
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #FFFBF7 0%, var(--cream) 55%, #FDF1E6 100%);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: auto 0 0 0; height: 220px; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(120% 90% at 20% 120%, rgba(249,115,22,.18), transparent 60%),
+        radial-gradient(120% 90% at 90% 130%, rgba(249,115,22,.22), transparent 60%);
+    }
+    main { max-width: 560px; margin: 0 auto; padding: 32px 16px 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
+    .brand svg { flex: none; }
+    .brand b { display: block; font-size: 30px; line-height: 1; color: var(--orange-deep); letter-spacing: -0.5px; }
+    .brand span { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.15; margin-top: 3px; }
+    h1 { font-size: 30px; line-height: 1.15; letter-spacing: -0.6px; margin: 0 0 10px; }
+    .lead { color: var(--ink-soft); font-size: 16px; margin: 0 0 26px; }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(194,65,12,.08), 0 1px 2px rgba(0,0,0,.03);
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    .download {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; min-height: 58px; padding: 0 20px;
+      border-radius: 18px; border: 0;
+      background: linear-gradient(90deg, #FB923C, var(--orange-deep));
+      color: #fff; font-size: 17px; font-weight: 650; text-decoration: none;
+      box-shadow: 0 8px 20px rgba(249,115,22,.25);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .download:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(249,115,22,.32); }
+    .download:active { transform: translateY(0); }
+    .download:focus-visible, a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center; margin-top: 12px; color: var(--muted); font-size: 13px; }
+    .alt { text-align: center; margin-top: 12px; font-size: 14px; }
+    .alt a { color: var(--orange-deep); font-weight: 600; }
+    h2 { font-size: 17px; margin: 0 0 12px; letter-spacing: -0.2px; }
+    ol { margin: 0; padding-left: 0; list-style: none; counter-reset: step; }
+    ol li { counter-increment: step; position: relative; padding: 0 0 12px 40px; color: var(--ink-soft); font-size: 15px; }
+    ol li:last-child { padding-bottom: 0; }
+    ol li::before {
+      content: counter(step);
+      position: absolute; left: 0; top: -1px;
+      width: 26px; height: 26px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--orange-soft); color: var(--orange-deep); font-weight: 700; font-size: 13px;
+    }
+    ol b { color: var(--ink); }
+    .note { display: flex; gap: 10px; color: var(--ink-soft); font-size: 14px; }
+    .note svg { flex: none; margin-top: 2px; }
+    details { font-size: 13px; color: var(--muted); }
+    summary { cursor: pointer; color: var(--ink-soft); font-weight: 600; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; word-break: break-all; color: var(--ink-soft); }
+    .status { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--muted); }
+    .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+    .status.ok { color: var(--green); }
+    .status.ok i { background: var(--green); }
+    footer { text-align: center; margin-top: 28px; font-size: 12.5px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand" aria-label="SLG Housekeeping and Facility Services">
+      <svg width="74" height="52" viewBox="0 0 74 52" aria-hidden="true">
+        <path d="M0 32 Q33 1 74 11 Q33 8 3 36Z" fill="#EA580C"/>
+        <rect x="9" y="29" width="15" height="23" fill="#F97316"/>
+        <rect x="25" y="17" width="20" height="35" fill="#EA580C"/>
+        <rect x="47" y="24" width="18" height="28" fill="#F97316"/>
+        <g fill="#fff">
+          <rect x="12" y="33" width="3.5" height="3.5"/><rect x="18" y="33" width="3.5" height="3.5"/>
+          <rect x="12" y="40" width="3.5" height="3.5"/><rect x="18" y="40" width="3.5" height="3.5"/>
+          <rect x="29" y="21" width="4" height="3.5"/><rect x="37" y="21" width="4" height="3.5"/>
+          <rect x="29" y="28" width="4" height="3.5"/><rect x="37" y="28" width="4" height="3.5"/>
+          <rect x="29" y="35" width="4" height="3.5"/><rect x="37" y="35" width="4" height="3.5"/>
+          <rect x="50" y="28" width="4" height="3.5"/><rect x="57" y="28" width="4" height="3.5"/>
+          <rect x="50" y="35" width="4" height="3.5"/><rect x="57" y="35" width="4" height="3.5"/>
+        </g>
+      </svg>
+      <div><b>SLG</b><span>Housekeeping &amp;<br>Facility Services</span></div>
+    </div>
+
+    <h1>SLG FieldTrack</h1>
+    <p class="lead">The Android app for SLG field staff and supervisors. Staff share their location while on duty; supervisors see the team on a live map.</p>
+
+    <section class="card" aria-labelledby="dl">
+      <h2 id="dl" class="visually-hidden" style="position:absolute;left:-9999px">Download</h2>
+      <a class="download" href="/download/slg-fieldtrack-1.0.0-arm64-v8a.apk" download>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download for Android
+      </a>
+      <div class="meta"><span>Version 1.0.0</span><span>19.3 MB</span><span>Android 7.0 or newer</span></div>
+      <p class="alt">Older phone? <a href="/download/slg-fieldtrack-1.0.0-armeabi-v7a.apk" download>Download the 32-bit version</a> (17.0 MB)</p>
+    </section>
+
+    <section class="card" aria-labelledby="install">
+      <h2 id="install">Install and set up</h2>
+      <ol>
+        <li>Tap <b>Download for Android</b>, then open the file when it finishes.</li>
+        <li>If Android asks, allow your browser to <b>install unknown apps</b>, then tap <b>Install</b>.</li>
+        <li>Open <b>SLG FieldTrack</b>. The server address is already filled in.</li>
+        <li>Enter the <b>8-character pairing code</b> your supervisor gives you and tap <b>Pair Device</b>.</li>
+        <li>Staff: turn on <b>Share my location</b> and choose <b>Allow all the time</b> when asked.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <div class="note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <span>Your location is shared only while you keep sharing on, or when you approve a specific request. A notification stays visible the whole time, and you can pause it in the app at any moment.</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="status" id="status"><i></i>Checking server…</span>
+      <details style="margin-top:12px">
+        <summary>File checksums (SHA-256)</summary>
+        <p>64-bit: <code>0e636a6af28b2e6f1f6a794665f14a4a82426a804ab50e9e3285ed68dba0a501</code></p>
+        <p>32-bit: <code>91ebcdb0d3a9fc7051b4c89579f511902b41f95f1cd0291eca3c49c06422a38d</code></p>
+        <p>Signing certificate: <code>b0a1367b40c038dd9f7261b11506f69effe41767014bdb715c3390367c647d86</code></p>
+      </details>
+    </section>
+
+    <footer>© SLG Housekeeping &amp; Facility Services · For SLG staff only</footer>
+  </main>
+  <script>
+    fetch('/api/v1/health', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then(() => {
+        const el = document.getElementById('status');
+        el.classList.add('ok');
+        el.lastChild.textContent = 'Server online';
+      })
+      .catch(() => { document.getElementById('status').lastChild.textContent = 'Server not reachable right now'; });
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+// SLG FieldTrack on Cloudflare Workers. Deployed by Workers Builds on every
+// push to main (`npx wrangler deploy`). See cloud/README.md.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tracker",
+  "main": "cloud/src/index.ts",
+  "compatibility_date": "2026-10-15",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Download page and APK; /api/* always reaches the Worker first.
+  "assets": {
+    "directory": "cloud/public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "slg-fieldtrack",
+      "database_id": "c530c609-a9b2-4c78-886f-c4af591fb35e"
+    }
+  ],
+
+  // Single realtime hub holding every admin and employee WebSocket.
+  "durable_objects": {
+    "bindings": [{ "name": "HUB", "class_name": "Hub" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Hub"] }],
+
+  // Expires unanswered location requests and prunes rate-limit rows.
+  "triggers": { "crons": ["* * * * *"] },
+
+  "observability": { "enabled": true },
+
+  "vars": {
+    "OFFLINE_AFTER_MINUTES": "15",
+    "REQUEST_TIMEOUT_SECONDS": "120",
+    "DEFAULT_SITE_RADIUS_M": "150",
+    "LOW_ACCURACY_THRESHOLD_M": "100",
+    "PAIR_RATE_LIMIT_PER_MINUTE": "10"
+  }
+  // Optional secrets (set in the dashboard → Settings → Variables and secrets):
+  //   GOOGLE_GEOCODING_API_KEY  readable addresses
+  //   FIREBASE_SERVICE_ACCOUNT  service-account JSON for FCM pushes
+}

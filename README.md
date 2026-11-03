@@ -7,8 +7,9 @@ consented, either by turning on sharing or by approving a specific request.
 
 | Part | Stack | Folder |
 |------|-------|--------|
+| **Production backend + APK download** | Cloudflare Worker, D1, Durable Objects (free plan) | [`cloud/`](cloud) — https://tracker.riteshrajkintali.workers.dev |
 | Mobile app (admin + employee modes) | Flutter 3.41, Google Maps SDK, geolocator (Android Fused Location), FCM | [`app/`](app) |
-| Backend API + realtime | Python FastAPI, SQLAlchemy 2, WebSockets | [`backend/`](backend) |
+| Self-hosted backend (same API) | Python FastAPI, SQLAlchemy 2, WebSockets | [`backend/`](backend) |
 | Database | PostgreSQL 14+ (Alembic migrations) | [`backend/migrations`](backend/migrations) |
 
 Architecture, schema, API and WebSocket contracts: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
